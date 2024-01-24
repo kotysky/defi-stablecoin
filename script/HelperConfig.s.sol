@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18;
+pragma solidity ^0.8.19;
 
 import {Script} from "forge-std/Script.sol";
 
@@ -24,5 +24,11 @@ contract HelperConfig is Script {
             wbtc: 0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063,
             deployerKey: vm.envUint("PRIVATE_KEY")
         });
+    }
+
+    function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
+        if (activeNetworkConfig.wethUsdPriceFeed != address(0)) {
+            return activeNetworkConfig;
+        }
     }
 }
