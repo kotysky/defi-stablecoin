@@ -45,7 +45,7 @@ import {DecentralizedStableCoin} from "./DecentralizedStableCoin.sol";
  * @notice This contract is very loosely based on the MakerDAO DSS (DAI) system.
  */
 
-contract DCSEngine is ReentrancyGuard {
+contract DSCEngine is ReentrancyGuard {
     //////////////////////////
     //        Errors     //
     //////////////////////////
@@ -182,11 +182,11 @@ contract DCSEngine is ReentrancyGuard {
             tokenCollateralAddress,
             amountCollateral
         ); // Emit an event
-        bool success = IERC20(tokenCollateralAddress).transferFrom(
+        /*bool success = IERC20(tokenCollateralAddress).transferFrom(
             msg.sender,
             address(this),
             amountCollateral
-        );
+        );*/
     }
 
     ////////////////////////////////////
@@ -222,7 +222,7 @@ contract DCSEngine is ReentrancyGuard {
     function _getUsdValue(
         address token,
         uint256 amount
-    ) private view returns (uint256) {
+    ) public view returns (uint256) {
         AggregatorV3Interface priceFeed = AggregatorV3Interface(
             s_priceFeeds[token]
         );
